@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>资本控制器</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .centered>div {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 16px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    #middle {
+        font-size: 20px;
+        color: #333;
+        min-height: 60px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .last {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    button {
+        flex: 1 1 auto;
+        min-width: 100px;
+        height: 45px;
+        font-size: 16px;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #bbb;
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #e0e0e0;
+    }
+
+    .new {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="centered">
+        <h1>资本控制器</h1>
+        <div>
+            <div id="aka" class="new">
+                <span>进度：</span>
+                <span id="set">0%</span>
+            </div>
+            <div id="middle"></div>
+            <div class="last">
+                <button id="star">开始</button>
+                <button class="new" id="level1">初级</button>
+                <button class="new" id="level2">中级</button>
+                <button class="new" id="level3">高级</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let bu = document.querySelectorAll('.last button');
+        let di = document.getElementById('aka');
+        let value = document.getElementById('set');
+        let isRunning = false;
+        let interval = null;
+        let mid = document.getElementById('middle');
+
+        bu[0].addEventListener('click', () => {
+            mid.innerHTML = "请选择控制级别";
+            bu[0].style.display = 'none';
+            bu[1].classList.remove('new');
+            bu[2].classList.remove('new');
+            bu[3].classList.remove('new');
+        });
+
+        bu[1].addEventListener('click', () => {
+            di.classList.remove('new');
+            if (isRunning) return;
+            isRunning = true;
+
+            let percentage = 0;
+            value.textContent = `${percentage}%`;
+            mid.innerHTML = "加载中，请稍候...";
+
+            const interval = setInterval(() => {
+                if (percentage < 100) {
+                    percentage++;
+                    value.textContent = `${percentage}%`;
+                } else {
+                    clearInterval(interval);
+                    value.textContent = `100% `;
+                    isRunning = false;
+                    mid.innerHTML = '恭喜你你成功被资本家浪费了5秒';
+                }
+            }, 50);
+        });
+
+        bu[2].addEventListener('click', () => {
+            di.classList.remove('new');
+            if (isRunning) return;
+            isRunning = true;
+
+            let percentage = 0;
+            value.textContent = `${percentage}%`;
+            mid.innerHTML = "加载中，请稍候...";
+            const interval = setInterval(() => {
+                if (percentage < 100) {
+                    percentage++;
+                    value.textContent = `${percentage}%`;
+                } else {
+                    clearInterval(interval);
+                    value.textContent = `100% `;
+                    isRunning = false;
+                    mid.innerHTML = '恭喜你你成功被资本家浪费了10秒';
+                }
+            }, 100);
+        });
+
+        bu[3].addEventListener('click', () => {
+            di.classList.remove('new');
+            if (isRunning) return;
+            isRunning = true;
+
+            let percentage = 0;
+            value.textContent = `${percentage}%`;
+            mid.innerHTML = "加载中，请稍候...";
+            const interval = setInterval(() => {
+                if (percentage < 100) {
+                    percentage++;
+                    value.textContent = `${percentage}%`;
+                } else {
+                    clearInterval(interval);
+                    value.textContent = `100% `;
+                    isRunning = false;
+                    mid.innerHTML = '恭喜你你成功被资本家浪费了20秒';
+                }
+            }, 200);
+        });
+    });
+</script>
+
+</html>
